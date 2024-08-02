@@ -10,7 +10,7 @@ jobs:
       - run:
           name: "Docker Login"
           command: |
-            echo ${DOCKER_PASSWORD} | docker login  docker login -u ${DOCKER_USER} -password-stdin Yash@1234
+            echo ${DOCKER_PASSWORD} | docker login -u ${DOCKER_USER} --password-stdin Yash@1234
 
       - run:
           name: "Docker Build"

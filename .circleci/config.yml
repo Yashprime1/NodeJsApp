@@ -20,7 +20,7 @@ jobs:
       - run:
           name: "Docker Push"
           command: |
-            docker build -t yashprime07/circlecitest .
+            docker push yashprime07/circlecitest 
 
 
 workflows:

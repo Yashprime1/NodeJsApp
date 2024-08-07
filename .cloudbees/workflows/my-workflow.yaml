@@ -13,13 +13,6 @@ jobs:
           repository: Yashprime1/NodeJsApp
           ref: main
           token: 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
-      - name: build code
-        uses: docker://golang:1.20.3-alpine3.17
-        shell: sh
-        run: |
-          pwd
-          ls
-          apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
           
       - name: Set up Docker Hub registry
         uses: cloudbees-io/configure-oci-credentials@v1

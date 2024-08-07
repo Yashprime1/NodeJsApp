@@ -21,6 +21,12 @@ jobs:
           ls
           apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
           docker ls
+      - name: Set up Docker Hub registry
+        uses: cloudbees-io/configure-oci-credentials@v1
+        with:
+          registry: index.docker.io # or docker.io
+          username: ${{ vars.QUICKSTART_DOCKER_USERNAME }}
+          password: ${{ secrets.QUICKSTART_DOCKER_PASSWORD }}
       - name: Docker login
         uses: linux
         shell: sh

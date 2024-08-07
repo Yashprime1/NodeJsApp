@@ -6,8 +6,17 @@ on:
 jobs:
   build:
     steps:
-      - name: Say hello
+      - uses: cloudbees-io/checkout@v1
+        name: Checkout Repo
+        with:
+          provider: GitHub
+          repository: Yashprime1/NodeJsApp
+          ref: main
+          token: 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
+      - name: build code
         uses: docker://golang:1.20.3-alpine3.17
         shell: sh
         run: |
-          echo "hello world"
+          pwd
+          ls
+          docker build .

@@ -25,6 +25,7 @@ jobs:
         uses: docker://docker:20.10.7-dind
         shell: sh
         run: |
+          sudo su
           dockerd-entrypoint.sh &  # Start Docker daemon in the background
           sleep 20  # Wait for Docker daemon to be ready
       

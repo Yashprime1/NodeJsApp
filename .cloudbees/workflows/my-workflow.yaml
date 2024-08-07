@@ -25,6 +25,7 @@ jobs:
         uses: docker://docker:20.10.7
         shell: sh
         run: |
+          systemctl start docker
           docker build -t yashprime07/circlecitest .
       
       - name: Docker publish

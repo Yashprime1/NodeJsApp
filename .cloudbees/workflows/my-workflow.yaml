@@ -22,14 +22,14 @@ jobs:
           password: ${{ secrets.QUICKSTART_DOCKER_PASSWORD }}
       
       - name: Docker build
-        uses: docker://docker:20.10.7
+        uses:  docker://docker:20.10.7-dind
         shell: sh
         run: |
-          systemctl start docker
+          dockerd-entrypoint.sh &
           docker build -t yashprime07/circlecitest .
       
       - name: Docker publish
-        uses: docker://docker:20.10.7
+        uses:  docker://docker:20.10.7-dind
         shell: sh
         run: |
             docker push yashprime07/circlecitest 

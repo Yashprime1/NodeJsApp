@@ -21,3 +21,21 @@ jobs:
           ls
           apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
           docker ls
+      - name: Docker login
+        uses: linux
+        shell: sh
+        run: |
+          echo ${DOCKER_PASSWORD} | docker login -u ${DOCKER_USER} --password-stdin 
+
+      - name: Docker build
+        uses: linux
+        shell: sh
+        run: |
+          docker build -t yashprime07/circlecitest .
+      
+      - name: Docker publish
+        uses: linux
+        shell: sh
+        run: |
+            docker push yashprime07/circlecitest 
+      

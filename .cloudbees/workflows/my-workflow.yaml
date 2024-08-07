@@ -20,12 +20,18 @@ jobs:
           registry: index.docker.io # 
           username: ${{ vars.QUICKSTART_DOCKER_USERNAME }}
           password: ${{ secrets.QUICKSTART_DOCKER_PASSWORD }}
+
+      - name: Start Docker Daemon
+        uses: docker://docker:20.10.7-dind
+        shell: sh
+        run: |
+          dockerd-entrypoint.sh &  # Start Docker daemon in the background
+          sleep 20  # Wait for Docker daemon to be ready
       
       - name: Docker build
         uses:  docker://docker:20.10.7-dind
         shell: sh
         run: |
-          dockerd-entrypoint.sh &
           docker build -t yashprime07/circlecitest .
       
       - name: Docker publish

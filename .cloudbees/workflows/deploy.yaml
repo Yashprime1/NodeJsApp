@@ -19,7 +19,7 @@ jobs:
           ref: master
           token: ${{ vars.GIT_TOKEN }}
       - uses: docker://python:3-alpine3.20
-        name: Install Requirements
+        name: Install Requirements and Deploy
         shell: sh
         run: |
           pip3 install cfstack tabulate

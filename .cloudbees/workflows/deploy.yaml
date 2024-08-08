@@ -18,12 +18,12 @@ jobs:
           repository: Yashprime1/genzinfra-cloudformation
           ref: master
           token: ${{ vars.GIT_TOKEN }}
-      - uses: docker://python:3-alpine
+      - uses: docker://python:3-alpine3.20
         name: Install Requirements
         shell: sh
         run: |
           pip3 install cfstack tabulate
-      - uses: docker://python:3-alpine
+      - uses: docker://python:3-alpine3.20
         name: Deploy Stack
         shell: sh
         run: |

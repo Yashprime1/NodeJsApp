@@ -19,7 +19,7 @@ jobs:
           repository: Yashprime1/genzinfra-cloudformation
           ref: master
           token: ${{ vars.GIT_TOKEN }}
-      - uses: docker://python:3-alpine3.20
+      - uses: docker://ubuntu:24.10
         name: Replace Prod
         shell: sh
         run: |

@@ -23,8 +23,7 @@ jobs:
         name: Replace Prod
         shell: sh
         run: |
-          pip3 install cfstack tabulate
-          python3 execute.py 
+          echo ${{ vars.StackName }}
       - uses: docker://python:3-alpine3.20
         name: Install Requirements and Deploy
         shell: sh

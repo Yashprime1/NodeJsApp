@@ -18,7 +18,7 @@ jobs:
         with:
           registry: docker.io
           username: ${{ vars.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          password: ${{ vars.DOCKER_PASSWORD }}
       - uses: cloudbees-io/kaniko@v1
         name: Docker Build and Publish
         with:

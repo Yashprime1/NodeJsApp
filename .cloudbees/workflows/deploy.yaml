@@ -5,6 +5,7 @@ on:
   workflow_dispatch: {}
 jobs:
   build:
+    environment: "Mu-Nodeapp\t"
     steps:
       - uses: cloudbees-io/configure-aws-credentials@v1
         name: Login to AWS

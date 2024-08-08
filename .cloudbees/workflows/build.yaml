@@ -16,9 +16,9 @@ jobs:
       - uses: cloudbees-io/configure-oci-credentials@v1
         name: Set up Docker Hub registry
         with:
-          registry: index.docker.io
-          username: ${{ vars.QUICKSTART_DOCKER_USERNAME }}
-          password: ${{ secrets.QUICKSTART_DOCKER_PASSWORD }}
+          registry: docker.io
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
       - uses: cloudbees-io/kaniko@v1
         name: Docker Build and Publish
         with:

@@ -5,6 +5,7 @@ on:
   workflow_dispatch: {}
 jobs:
   deploy:
+    environment: "Mu-Nodeapp"
     steps:
       - uses: cloudbees-io/configure-aws-credentials@v1
         name: Login to AWS
@@ -19,9 +20,14 @@ jobs:
           ref: master
           token: ${{ vars.GIT_TOKEN }}
       - uses: docker://python:3-alpine3.20
+        name: Replace Prod
+        shell: sh
+        run: |
+          pip3 install cfstack tabulate
+          python3 execute.py 
+      - uses: docker://python:3-alpine3.20
         name: Install Requirements and Deploy
         shell: sh
         run: |
           pip3 install cfstack tabulate
           python3 execute.py 
-        

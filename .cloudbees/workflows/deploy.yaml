@@ -4,7 +4,7 @@ name: Deploy
 on:
   workflow_dispatch: {}
 jobs:
-  build:
+  deploy:
     environment: "Mu-Nodeapp\t"
     steps:
       - uses: cloudbees-io/configure-aws-credentials@v1

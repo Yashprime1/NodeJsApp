@@ -1,0 +1,26 @@
+apiVersion: automation.cloudbees.io/v1alpha1
+kind: workflow
+name: Deploy
+on:
+  workflow_dispatch: {}
+jobs:
+  build:
+    steps:
+      - uses: cloudbees-io/configure-aws-credentials@v1
+        name: Login to AWS
+        with:
+          aws-access-key-id: AKIA2W7N2CDWYQWTPQYS
+          aws-secret-access-key: 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
+          aws-region: ap-south-1
+      - uses: cloudbees-io/checkout@v1
+        name: Checkout
+        with:
+          repository: Yashprime1/genzinfra-cloudformation
+          ref: master
+          token: ghp_e8NmaqlMHom4RpRduoC7UfOJeyFA7N3HbQg
+      - uses: docker://python:3-alpine
+        name: Install Requirements
+        shell: sh
+        run: |
+          pip3 install cfstack tabulate
+          python3 execute.py 

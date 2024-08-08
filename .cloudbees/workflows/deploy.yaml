@@ -27,8 +27,9 @@ jobs:
           apt-get install jq -y
           cat -v prod.json
           jq 'keys' prod.json
-          echo "${{ vars.Region }}-${{ vars.StackName }}"
-          jq --arg new_image "yashprime07/circlecitest" '.Stacks["${{ vars.Region }}"]["${{ vars.StackName }}"].Parameters.Image = $new_image' prod.json > output.json
+          export REGION=${{ vars.Region }}
+          export STACKNAME=${{ vars.StackName }}
+          jq --arg new_image "yashprime07/circlecitest" '.Stacks[${REGION}][${STACKNAME}].Parameters.Image = $new_image' prod.json > output.json
           cat output.json
       - uses: docker://python:3-alpine3.20
         name: Install Requirements and Deploy

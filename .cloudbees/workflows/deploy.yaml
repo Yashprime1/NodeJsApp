@@ -23,6 +23,7 @@ jobs:
         name: Replace Prod
         shell: sh
         run: |
+          apt update -y
           apt-get install jq -y
           jq --arg new_image "yashprime07/circlecitest" '.Stacks[${{ vars.Region }}][${{ vars.StackName }}].Parameters.Image = $new_image' input.json > output.json
       - uses: docker://python:3-alpine3.20

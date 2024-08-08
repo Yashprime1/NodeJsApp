@@ -23,4 +23,8 @@ jobs:
         shell: sh
         run: |
           pip3 install cfstack tabulate
+      - uses: docker://python:3-alpine
+        name: Deploy Stack
+        shell: sh
+        run: |
           python3 execute.py 

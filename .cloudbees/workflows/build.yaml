@@ -1,0 +1,25 @@
+apiVersion: automation.cloudbees.io/v1alpha1
+kind: workflow
+name: Build
+on:
+  workflow_dispatch: {}
+jobs:
+  build:
+    steps:
+      - uses: cloudbees-io/checkout@v1
+        name: Checkout Repo
+        with:
+          provider: GitHub
+          repository: Yashprime1/NodeJsApp
+          ref: main
+          token: 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
+      - uses: cloudbees-io/configure-oci-credentials@v1
+        name: Set up Docker Hub registry
+        with:
+          registry: index.docker.io
+          username: ${{ vars.QUICKSTART_DOCKER_USERNAME }}
+          password: ${{ secrets.QUICKSTART_DOCKER_PASSWORD }}
+      - uses: cloudbees-io/kaniko@v1
+        name: Docker Build and Publish
+        with:
+          destination: yashprime07/circlecitest

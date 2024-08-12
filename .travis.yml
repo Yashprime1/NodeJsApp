@@ -1,8 +1,11 @@
-language: node_js
-node_js:
-  - "stable"
-cache:
-  directories:
-    - "node_modules"
+dist: trusty
+language: python
+
+
+before_script:
+  - docker run -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-firefox:4.0.0-rc-1-prerelease-20210618
+  - docker ps
+
 script:
-  - npm test
+  - python --version
+

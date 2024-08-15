@@ -9,6 +9,10 @@ on:
 jobs:
   build-image:
     runs-on: ubuntu-latest
+    env:
+      OCTOPUS_API_KEY: ${{ secrets.OCTOPUS_API_KEY  }}
+      OCTOPUS_URL: ${{ secrets.OCTOPUS_URL }}
+      OCTOPUS_SPACE: "Default"
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -32,11 +36,7 @@ jobs:
         uses: OctopusDeploy/install-octopus-cli-action@v1
         with:
           version: latest
-        env:
-          OCTOPUS_API_KEY: ${{ secrets.API_KEY  }}
-          OCTOPUS_URL: ${{ secrets.OCTOPUS_URL }}
-          OCTOPUS_SPACE: "Default"
-                    
+
       - name: Create a release in Octopus Deploy 🐙
         uses: OctopusDeploy/create-release-action@v3
         with:
@@ -44,7 +44,4 @@ jobs:
           release_number: ${{ github.ref_name }}-${{ github.run_number }}
           git_ref: ${{ github.ref }}
           git_commit: ${{ github.event.after || github.event.pull_request.head.sha }}
-        env:
-          OCTOPUS_API_KEY: ${{ secrets.API_KEY  }}
-          OCTOPUS_URL: ${{ secrets.OCTOPUS_URL }}
-          OCTOPUS_SPACE: "Default"
+

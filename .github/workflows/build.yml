@@ -1,0 +1,28 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - "*"
+
+jobs:
+  build-image:
+    runs-on: ubuntu
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Docker Login
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: echo $DOCKER_PASSWORD | docker login -u $DOCKER_USER --password-stdin
+
+      - name: Docker Build
+        run: docker build -t yashprime07/circlecitest:${{ github.ref_name }}-${{ github.run_number }} .
+
+      - name: Docker Push
+        run: docker push yashprime07/circlecitest:${{ github.ref_name }}-${{ github.run_number }}

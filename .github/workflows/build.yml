@@ -1,5 +1,5 @@
 name: Build and Push Docker Image
-
+run-name: ${{ github.ref_name }}-${{ github.run_number }}
 on:
   push:
     branches:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-image:
-    runs-on: ubuntu
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2

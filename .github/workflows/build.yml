@@ -5,9 +5,14 @@ on:
     branches:
       - "*"
 
+
 jobs:
   build-image:
     runs-on: ubuntu-latest
+    env:
+      OCTOPUS_API_KEY: ${{ secrets.API_KEY  }}
+      OCTOPUS_URL: ${{ secrets.OCTOPUS_URL }}
+      OCTOPUS_SPACE: 'Outer Space'
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -26,3 +31,16 @@ jobs:
 
       - name: Docker Push
         run: docker push yashprime07/circlecitest:${{ github.ref_name }}-${{ github.run_number }}
+
+      - name: Install Octopus CLI
+        uses: OctopusDeploy/install-octopus-cli-action@v1
+        with:
+          version: latest
+          
+      - name: Create a release in Octopus Deploy 🐙
+        uses: OctopusDeploy/create-release-action@v3
+        with:
+          project: 'NodeJS Project'
+          release_number: ${{ github.ref_name }}-${{ github.run_number }}
+          git_ref: ${{ github.ref }}
+          git_commit: ${{ github.event.after || github.event.pull_request.head.sha }}

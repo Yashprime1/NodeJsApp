@@ -1,17 +1,17 @@
-variable "PLATFORM_BOT_INSTALLATION_ID" {
-    value "53815121" {
-        process = ["deployment-process"]
+variable "AWS_DEFAULT_REGION" {
+    value "ap-south-1" {
+        action = ["checkout-and-deploy"]
     }
 }
 
 variable "PLATFORM_BOT_APP_ID" {
     value "971056" {
-        process = ["deployment-process"]
+        action = ["checkout-and-deploy"]
     }
 }
 
-variable "AWS_DEFAULT_REGION" {
-    value "ap-south-1" {
-        process = ["deployment-process"]
+variable "PLATFORM_BOT_INSTALLATION_ID" {
+    value "53815121" {
+        action = ["checkout-and-deploy"]
     }
 }

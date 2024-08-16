@@ -37,7 +37,7 @@ jobs:
         with:
           version: latest
 
-      - name: Create a release in Octopus Deploy 🐙
+      - name: Create a release in Octopus Deploys 🐙
         uses: OctopusDeploy/create-release-action@v3
         with:
           project: 'Testing'

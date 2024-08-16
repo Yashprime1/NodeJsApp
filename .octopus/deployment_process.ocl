@@ -45,7 +45,6 @@ step "checkout-and-deploy" {
                 token=$(echo $gitHubTokenSecret | jq -r '.token')
                 git clone https://x-access-token:$token@github.com/Yashprime1/genzinfra-cloudformation.git
                 cd genzinfra-cloudformation
-                #!/bin/bash
                 
                 # Function to replace the Image tag
                 replace_image_tag() {

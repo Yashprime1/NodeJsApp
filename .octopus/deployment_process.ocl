@@ -63,7 +63,7 @@ step "checkout-and-deploy" {
                     export app_region="ap-northeast-2"
                 fi
                 
-                jq ".Stacks.${app_region}.${app_name}.Parameters.Image=$new_image" "$json_file" > temp.json && mv temp.json "$json_file"
+                jq ".Stacks.${app_region}.${app_name}.Parameters.Image |= $new_image" "$json_file" > temp.json && mv temp.json "$json_file"
                 echo "After"
                 cat $json_file
                 

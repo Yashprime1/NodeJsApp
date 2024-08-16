@@ -56,6 +56,7 @@ step "checkout-and-deploy" {
                     # Using jq to update the Image tag in the appropriate section
                     jq --arg app "$app_name" --arg image "$new_image" '
                     (.Stacks[][][$app].Parameters.Image) |= $image' "$json_file" > temp.json && mv temp.json "$json_file"
+                    cat prod.json
                 }
                 
                 

@@ -11,5 +11,7 @@ variable "PLATFORM_BOT_APP_ID" {
 }
 
 variable "AWS_DEFAULT_REGION" {
-    value "ap-south-1" {}
+    value "ap-south-1" {
+        process = ["deployment-process"]
+    }
 }

@@ -40,7 +40,7 @@ jobs:
       - name: Create a release in Octopus Deploy 🐙
         uses: OctopusDeploy/create-release-action@v3
         with:
-          project: 'NodeJS Project'
+          project: 'Testing'
           release_number: ${{ github.ref_name }}-${{ github.run_number }}
           git_ref: ${{ github.ref }}
           git_commit: ${{ github.event.after || github.event.pull_request.head.sha }}

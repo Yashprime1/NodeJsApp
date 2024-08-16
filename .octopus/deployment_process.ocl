@@ -49,14 +49,24 @@ step "checkout-and-deploy" {
                 
                 cd genzinfra-cloudformation
                 app_name=$(get_octopusvariable "Octopus.Environment.Name")
-                new_image="yashprime07/circlecitest:$(get_octopusvariable \"Octopus.Release.Number\")"
+                release_number= $(get_octopusvariable "Octopus.Release.Number")
+                new_image="yashprime07/circlecitest:${release_number}"
                 echo $app_name $new_image
                 json_file="prod.json"
+                
+                echo "Before"
                 cat $json_file
                 ls 
+                if [[ "$app_name" == *"Mu"*  ]]; then
+                    export app_region="ap-south-1"
+                elif [[ "$app_name" == *"Sk"*  ]]; then
+                    export app_region="ap-northeast-2"
+                fi
                 
-                jq --arg app "$app_name" --arg image "$new_image" '.Stacks[][] | select(has($app)) | .[$app].Parameters.Image = $image' "$json_file" > temp.json && mv temp.json "$json_file"
-                cat prod.json
+                jq --arg app "$app_name" --arg image "$new_image" '.Stacks.${app_region}.${app_name}.Parameters.Image=$image' "$json_file" > temp.json && mv temp.json "$json_file"
+                echo "After"
+                cat $json_file
+                
                 echo "Image tag updated successfully for $(get_octopusvariable "Octopus.Environment.Name")!"
                 pip3 install cfstack tabulate
                 python3 execute.py 

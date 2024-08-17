@@ -71,6 +71,8 @@ step "checkout-and-deploy" {
                 echo "Image tag updated successfully for $(get_octopusvariable "Octopus.Environment.Name")!"
                 pip3 install cfstack tabulate
                 python3 execute.py 
+                git commit -am "Updating image for $app_name with tag $new_image"
+                git push
                 EOT
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "Bash"
